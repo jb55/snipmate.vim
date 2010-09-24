@@ -5,12 +5,6 @@ snippet main
 		${1}
 		return 0;
 	}
-snippet mainn
-	int main(void)
-	{
-		${1}
-		return 0;
-	}
 # #include <...>
 snippet inc
 	#include <${1:stdio}.h>${2}
@@ -23,7 +17,7 @@ snippet Def
 	#define ${1:SYMBOL} ${2:value}
 	#endif${3}
 snippet def
-	#define
+	#define 
 snippet ifdef
 	#ifdef ${1:FOO}
 		${2:#define }
@@ -33,14 +27,16 @@ snippet #if
 		${2}
 	#endif
 # Header Include-Guard
+# (the randomizer code is taken directly from TextMate; it could probably be
+# cleaner, I don't know how to do it in vim script)
 snippet once
-	#ifndef ${1:`toupper(Filename('$1_H', 'UNTITLED_H'))`}
-
-	#define $1
+	#ifndef _${1:`toupper(Filename('', 'UNTITLED'))`}_H_
+	#define _$1_H_
+	#pragma once
 
 	${2}
 
-	#endif /* end of include guard: $1 */
+	#endif /* _$1_H_ */
 # If Condition
 snippet if
 	if (${1:/* condition */}) {
@@ -50,7 +46,7 @@ snippet el
 	else {
 		${1}
 	}
-# Ternary conditional
+# Tertiary conditional
 snippet t
 	${1:/* condition */} ? ${2:a} : ${3:b}
 # Do While Loop
@@ -59,7 +55,7 @@ snippet do
 		${2:/* code */}
 	} while (${1:/* condition */});
 # While Loop
-snippet wh
+snippet while
 	while (${1:/* condition */}) {
 		${2:/* code */}
 	}
@@ -108,6 +104,77 @@ snippet pr
 # fprintf (again, this isn't as nice as TextMate's version, but it works)
 snippet fpr
 	fprintf(${1:stderr}, "${2:%s}\n"${3});${4}
-# This is kind of convenient
 snippet .
 	[${1}]${2}
+snippet un
+	unsigned
+
+# more snippets
+snippet switch
+	switch (${1:/* Variable */}) {
+	case ${2:0}:
+		${3:/* Code */}
+		break;
+	default:
+	}
+
+snippet license MIT
+	/**
+	 *  Copyright (c) ${1:<year>} ${2:<copyright holders>}
+	 *
+	 *  Permission is hereby granted, free of charge, to any person
+	 *  obtaining a copy of this software and associated documentation
+	 *  files (the "Software"), to deal in the Software without
+	 *  restriction, including without limitation the rights to use,
+	 *  copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 *  copies of the Software, and to permit persons to whom the
+	 *  Software is furnished to do so, subject to the following
+	 *  conditions:
+	 *
+	 *  The above copyright notice and this permission notice shall be
+	 *  included in all copies or substantial portions of the Software.
+	 *
+	 *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	 *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+	 *  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	 *  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+	 *  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+	 *  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+	 *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+	 *  OTHER DEALINGS IN THE SOFTWARE.
+	 */
+snippet license GNU General Public License (GPLv3)
+	/**
+	 * ${1:<program name>}
+	 * Copyright (C) ${2:<year>}  ${3:<name of author>}
+	 *
+	 * This program is free software: you can redistribute it and/or modify
+	 * it under the terms of the GNU General Public License as published by
+	 * the Free Software Foundation, either version 3 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * This program is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 * GNU General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU General Public License
+	 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	 */
+snippet section
+	//===----------------------------------------------------------------------===//
+	// ${1:Section description}
+	//===----------------------------------------------------------------------===//
+snippet doxyfun
+	/**
+	 * ${1:Description}
+	 *
+	 * @param ${2:paramName} ${3:Parameter description}
+	 * @return ${4:Nothing}
+	 */
+snippet doxyline
+	/**< ${1:Description} */
+snippet doxy
+	/**
+	 * ${1:Comments}
+	 */
